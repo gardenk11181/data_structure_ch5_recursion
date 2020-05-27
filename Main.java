@@ -4,10 +4,23 @@ class Main {
     System.out.println(RecursionMethod.isPalindrome("HhH"));
     System.out.println(RecursionMethod.isAnBn("HHBB"));
     System.out.println(RecursionMethod.isPre("+pp"));
+    System.out.println(RecursionMethod.preToPost("++pp+pp"));
   }
 }
 
 class RecursionMethod {
+  public static String result;
+  
+  public static String preToPost(String pre) {
+    char ch = pre.charAt(0);
+    result = pre.substring(1,pre.length());
+    if(isLetter(ch)) return ""+ch;
+    else {
+      String post1 = preToPost(result);
+      String post2 = preToPost(result);
+      return post1 + post2 + ch;
+    }
+  }
   
   public static boolean isPre(String pre) {
     int first = 0;
