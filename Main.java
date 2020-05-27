@@ -3,10 +3,30 @@ class Main {
     System.out.println(RecursionMethod.isIdentifier("Hh"));
     System.out.println(RecursionMethod.isPalindrome("HhH"));
     System.out.println(RecursionMethod.isAnBn("HHBB"));
+    System.out.println(RecursionMethod.isPre("+pp"));
   }
 }
 
 class RecursionMethod {
+  
+  public static boolean isPre(String pre) {
+    int first = 0;
+    int last = pre.length()-1;
+    // first,last between 0 and pre.length()-1
+    int lastIndex = endPre(pre,first,last);
+    if(lastIndex==last) return true;
+    else return false;
+  }
+  
+  public static int endPre(String pre, int first, int last) {
+    if(first>last) return -1;
+    if(isLetter(pre.charAt(first))) return first;
+    else if(isOper(pre.charAt(first))) {
+      int firstEnd = endPre(pre, first+1,last);
+      if(firstEnd==-1) return -1;
+      else return endPre(pre, firstEnd+1,last);
+    } else return -1;
+  }
   
   public static boolean isAnBn(String string) {
     if(string.length()==0) {
@@ -45,7 +65,12 @@ class RecursionMethod {
         return false;
       }
     }
-  } 
+  }
+  
+  public static boolean isOper(char ch) {
+    if(ch=='+' || ch=='-' ||ch=='*') return true;
+    else return false;
+  }
   
   public static boolean isLetter(char ch) {
     if(ch>='A' && ch<='z') return true;
