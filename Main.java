@@ -5,11 +5,17 @@ class Main {
     System.out.println(RecursionMethod.isAnBn("HHBB"));
     System.out.println(RecursionMethod.isPre("+pp"));
     System.out.println(RecursionMethod.preToPost("++pp+pp"));
+    System.out.println(RecursionMethod.costOfHanoi(10));
   }
 }
 
 class RecursionMethod {
   public static String result;
+  
+  public static int costOfHanoi(int n){
+    if(n==1) return 1;
+    return costOfHanoi(n-1)+costOfHanoi(1)+costOfHanoi(n-1);
+  }
   
   public static String preToPost(String pre) {
     char ch = pre.charAt(0);
